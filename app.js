@@ -24,6 +24,12 @@ let is_searching_through_input = false;
 
 let searching_data = false;
 
+let is_data_compared = [];
+
+let reach_limit = 0;
+
+let is_reach_limit = false;
+
 /**
  * Document: This function is used to fetch spacex api request based on the declared offset and limit 
  * Triggered: When user loads the page or reloads the page or scroll down the page <br>
@@ -54,10 +60,12 @@ async function fetch_spaces() {
 
     /* destructuring only the docs for the required data */
 	const { docs } = spacex_response;
-        console.log({docs})
+
     /* if docs or data exists the assign the response data to data container */
     if(docs){
         data = docs;
+        is_reach_limit = (reach_limit === docs.length);
+        reach_limit = docs.length;
         return true;
     }
     else {
@@ -149,34 +157,39 @@ async function initialize(){
  */
 (async () => {
    let is_ready = false;
+        console.log({is_reach_limit})
+   if(!is_reach_limit){
+       /* if is_searching_through_input meaning there are no series of searching of keywords the allow the fetching of data */
+        if(!is_searching_through_input && !searching_data){
+            /* append loading to loading container  */
+            loading_container.innerHTML = loading;
     
-   /* if is_searching_through_input meaning there are no series of searching of keywords the allow the fetching of data */
-    if(!is_searching_through_input && !searching_data){
-        /* append loading to loading container  */
-        loading_container.innerHTML = loading;
-
-        /* disable the search input when fetching request */
-        search.setAttribute('disabled', true);
+            /* disable the search input when fetching request */
+            search.setAttribute('disabled', true);
+            
+            searching_data = true;
+            is_ready = await fetch_spaces();
+        }
         
-        searching_data = true;
-        is_ready = await fetch_spaces();
-    }
+        /* check if there are data response */
+        if(is_ready){
+            setTimeout(() => {
+                /* remove disabled search */
+                search.removeAttribute('disabled');
     
-    /* check if there are data response */
-    if(is_ready){
-        setTimeout(() => {
-            /* remove disabled search */
-            search.removeAttribute('disabled');
-
-            /* remove loading */
-            loading_container.innerHTML = '';
-            
-            searching_data = false;
-            
-            /* initialize again */
-            initialize();
-        }, 3000);
-    }
+                /* remove loading */
+                loading_container.innerHTML = is_reach_limit ? "<h1>No more data to be fetched</h1>" : '';
+                
+                searching_data = false;
+                
+                /* initialize again */
+                initialize();
+            }, 3000);
+        }
+   }
+   else {
+        loading_container.innerHTML = "<h1>No more data to be fetched</h1>";
+   }
 })();
 
 
@@ -197,31 +210,38 @@ async function handleScroll() {
     if (Math.ceil(currentScroll) >= documentHeight) {
         let is_ready = false;
 
-        /* if is_searching_through_input meaning there are no series of searching of keywords the allow the fetching of data */
-        if(!is_searching_through_input && !searching_data){
-            loading_container.innerHTML = loading;
-            search.setAttribute('disabled', true);
+        if(!is_reach_limit){
 
-            
-            /* add new 30 the previous limit */
-            limit += 30;
-            searching_data = true;
-            is_ready = await fetch_spaces();
-        }
-
-        if(is_ready){
-            setTimeout(() => {
-                /* remove disabled search */
-                search.removeAttribute('disabled');
-
-                /* remove loading */
-                loading_container.innerHTML = '';
-
-                searching_data = false;
+            /* if is_searching_through_input meaning there are no series of searching of keywords the allow the fetching of data */
+            if(!is_searching_through_input && !searching_data){
+                loading_container.innerHTML = loading;
+                search.setAttribute('disabled', true);
+    
                 
-                /* initialize again */
-                initialize();
-            }, 3000);
+                /* add new 30 the previous limit */
+                limit += 30;
+                searching_data = true;
+                is_ready = await fetch_spaces();
+            }
+    
+            if(is_ready){
+                setTimeout(() => {
+                    /* remove disabled search */
+                    search.removeAttribute('disabled');
+                    console.log(is_reach_limit)
+    
+                    /* remove loading */
+                    loading_container.innerHTML = is_reach_limit ? "<h1>No more data to be fetched</h1>" : '';
+    
+                    searching_data = false;
+                    
+                    /* initialize again */
+                    initialize();
+                }, 3000);
+            }
+        }
+        else{
+            loading_container.innerHTML = '<h1>No more data to be fetched</h1>';
         }
 	}
 };
