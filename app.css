@@ -1,0 +1,124 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  font-family: "Montserrat", "Alumni Sans Pinstripe", sans-serif;
+}
+
+body {
+  background-color: #f2f2f2;
+}
+
+.main {
+  margin: 0 100px;
+}
+
+.main img {
+  width: 100%;
+}
+
+.main .search-input {
+  margin: 20px 0;
+}
+
+.main .search-input input {
+  height: 50px;
+  width: 100%;
+  border: 0px;
+  font-size: 15px;
+  border-bottom: 1px solid black;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
+.main .search-input input:focus {
+  outline: none;
+}
+
+.main .search-result .card {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+
+.main .search-result .card .main_image {
+  min-height: 200px;
+  width: 200px;
+}
+
+.main .search-result .card .details h5 {
+  font-size: 12px;
+}
+
+.main .search-result .card .details h1 {
+  font-size: 20px;
+}
+
+.main .search-result .card .details p {
+  color: grey;
+  font-size: 12px;
+}
+
+.main .search-result .card .launch_details {
+  padding: 20px;
+  border-left: 1px solid black;
+}
+
+.main .search-result .card .launch_details span {
+  color: grey;
+}
+
+.main .search-result .card .launch_details p {
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 900px;
+  text-justify: inter-word;
+  text-align: justify;
+}
+
+.main .search-result .card .links {
+  padding: 20px;
+  border-left: 1px solid black;
+}
+
+.main .search-result .card .links span {
+  color: grey;
+}
+
+.main .search-result .card .links .lists {
+  margin: 20px;
+}
+
+.main .search-result .card .links .lists div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 10px 0;
+}
+
+.main .search-result .card .links .lists div img {
+  width: 30px;
+}
+
+.main .search-result .card .links .lists div p {
+  margin-left: 15px;
+}
+
+.main .loading-container {
+  margin: 20px 0;
+}
+
+.main .loading-container img {
+  height: 300px;
+}
+/*# sourceMappingURL=app.css.map */

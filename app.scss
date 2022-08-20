@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Montserrat", "Alumni Sans Pinstripe", sans-serif;
+}
+
+body {
+    background-color: rgb(242, 242, 242);
+}
+
+.main {
+    // background-color: black;
+    margin: 0 100px;
+    img {
+        width: 100%;
+    }
+    .search-input {
+        margin: 20px 0;
+        input {
+            height: 50px;
+            width: 100%;
+            border: 0px;
+            font-size: 15px;
+            border-bottom: 1px solid black;
+            padding: 0 5px;
+            border-radius: 5px;
+        }
+        input:focus {
+            outline: none;
+        }
+    }
+
+    .search-result {
+        .card {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            // justify-content: space-around;
+            gap: 20px;
+            .main_image {
+                min-height: 200px;
+                width: 200px;
+            }
+            .details {
+                h5 {
+                    font-size: 12px;
+                }
+                h1 {
+                    font-size: 20px;
+                }
+                p {
+                    color: grey;
+                    font-size: 12px;
+                }
+            }
+            .launch_details {
+                padding: 20px;
+                border-left: 1px solid black;
+                span {
+                    color: grey;
+                }
+                p {
+                    margin-left: 10px;
+                    margin-top: 10px;
+                    width: 900px;
+                    text-justify: inter-word;
+                    text-align: justify;
+                }
+            }
+            .links {
+                padding: 20px;
+                border-left: 1px solid black;
+
+                span {
+                    color: grey;
+                }
+                .lists {
+                    margin: 20px;
+                    div {
+                        display: flex;
+                        align-items: center;
+                        margin: 10px 0;
+                        img {
+                            width: 30px;
+                        }
+                        p {
+                            margin-left: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .loading-container{
+        margin: 20px 0;
+        img {
+            height: 300px;
+        }
+    }
+}
